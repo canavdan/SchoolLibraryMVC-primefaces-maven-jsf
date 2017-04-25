@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>My Account</title>
+            </f:facet>
+          
+        </h:head>
+
+        <h:body>
+            <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core" template="templates/template.xhtml">
+                <ui:define name="metadata"></ui:define>
+                <ui:define name="content">
+                    <h:form>
+                        Username:<h:inputText value="#{loginnBean.username}"/>
+                        <br/>
+                        Password:<h:inputSecret value="#{loginnBean.password}"/>
+                        <br/>
+                        <p:commandLink value="Login" action="#{loginnBean.validateUsernamePassword()}"/>
+                        <br/>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>  
+
+    </f:view>
+</html>       

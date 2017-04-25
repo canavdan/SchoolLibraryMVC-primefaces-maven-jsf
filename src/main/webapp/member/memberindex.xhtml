@@ -1,0 +1,162 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>User Account</title>
+            </f:facet>
+            <f:event type="preRenderView" listener="#{loginnBean.isMember(event)}"/>
+        </h:head>
+
+        <h:body onload="#{memberBean.fillVaribles()}">
+
+            <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core" template="/pages/templates/template.xhtml">
+                <ui:define name="metadata"></ui:define>
+                <ui:define name="content">
+
+                    <p:tabView>
+                        <p:tab title="My Profile">
+                            <h:panelGrid columns="2" cellpadding="10">                         
+                                <h:outputText value="School ID:" />
+                                <h:outputText value="#{memberBean.memberID}"/>
+                                <h:outputText value="Name:" />
+                                <h:outputText value="#{memberBean.name}"/>
+                                <h:outputText value="Surname:" />
+                                <h:outputText value="#{memberBean.surname}"/>
+                                <h:outputText value="Faculty:" />
+                                <h:outputText value="#{memberBean.faculty}"/>
+                                <h:outputText value="Department:" />
+                                <h:outputText value="#{memberBean.departmant}"/>
+                                <h:outputText value="Mail:" />
+                                <h:outputText value="#{memberBean.mail}"/>
+                                <h:outputText value="Number:" />
+                                <h:outputText value="#{memberBean.phonenumber}"/>
+                                <h:outputText value="Adress:" />
+                                <h:outputText value="#{memberBean.adress}"/>
+                                <p:row>
+                                    <h:outputText value="Password:"/>
+                                    <h:outputText value="#{memberBean.password}" rendered="#{not memberBean.editmode}" />
+                                    <h:inputText  value="#{memberBean.password}" rendered="#{memberBean.editmode}" />
+                                    <h:commandButton value="Edit" action="#{memberBean.edit}" rendered="#{not memberBean.editmode}" />
+                                    <h:commandButton value="Save" action="#{memberBean.save}" rendered="#{memberBean.editmode}" />
+                                </p:row>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="My materials">
+                            <p:dataTable var="loa" value="#{loanBean.userMaterialss}" >
+                                <p:column headerText="Loan-Id">
+                                    <h:outputText value="#{loa.loanID}" />
+                                </p:column>
+
+                                <p:column headerText="Name">
+                                    <h:outputText value="#{loa.materielName}" />
+                                </p:column>
+
+                                <p:column headerText="Due">
+                                    <h:outputText value="#{loa.due}" />
+                                </p:column>
+
+                                <p:column headerText="Out">
+                                    <h:outputText value="#{loa.out}" />
+                                </p:column>
+                                <p:column headerText="Extends">
+                                    <h:outputText value="#{loa.extend}" />
+                                    <br/>
+                                    <h:commandLink value="Extend" action="#{loanBean.extendBook(loa)}"/>
+                                </p:column>
+
+                                <p:column headerText="Return Book">
+                                    <p:growl id="message" showDetail="true" />
+                                    <h:commandLink value="Return" action="#{loanBean.returnMaterial(loa)}"/>
+
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+                        <p:tab title="Take Materials">
+                            <p:panelGrid id="panel" styleClass="panelNoBorder"  columnClasses="a,b,c,d">
+                                <p:row>
+                                    <p:column><h:outputText value="Query"/></p:column> 
+                                    <p:column colspan="3">
+                                        <p:inputText  label="Query" id="queryVal" size="50" value="#{takeBookBean.query}"/>
+                                        <p:column> <p:message  for="queryVal"/></p:column>                       
+                                    </p:column>                          
+
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:separator style="visibility: hidden"/></p:column>
+
+                                </p:row>
+                                <p:row>
+                                    <p:column>  <h:outputText value="Catalog"/></p:column> 
+                                    <p:column> <p:selectOneMenu value="#{takeBookBean.catalog}" >
+                                            <f:selectItem itemLabel="All Catalogs" itemValue="allCatalog"/>
+                                            <f:selectItems value="#{takeBookBean.catalogNames}"/>                              
+                                        </p:selectOneMenu></p:column>
+                                    <p:column>  <h:outputText value="Branch"/></p:column>
+                                    <p:column> <p:selectOneMenu value="#{takeBookBean.branch}">
+                                            <f:selectItem itemLabel="All Branches" itemValue="allBranch"/>
+                                            <f:selectItems value="#{takeBookBean.branchNames}"/>
+                                        </p:selectOneMenu></p:column>  
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:separator style="visibility: hidden"/></p:column>
+
+                                </p:row>
+
+                                <p:row>
+                                    <p:column><h:outputText value="Index"/></p:column>
+                                    <p:column><p:selectOneMenu value="#{takeBookBean.index}">
+                                            <f:selectItem itemLabel="Keywords" itemValue="keywords"/>
+                                            <f:selectItem itemLabel="Author" itemValue="author"/>
+                                            <f:selectItem itemLabel="Title" itemValue="title"/>
+                                            <f:selectItem itemLabel="Publisher" itemValue="publisher"/>
+                                            <f:selectItem itemLabel="Categories" itemValue="categories"/>             
+                                        </p:selectOneMenu></p:column>
+                                    <p:column><h:outputText value="Language"/></p:column>
+                                    <p:column><p:selectOneMenu value="#{takeBookBean.language}">
+                                            <f:selectItem itemLabel="All Languages" itemValue="allLang"/>
+                                            <f:selectItems value="#{takeBookBean.langNames}"/>
+                                        </p:selectOneMenu></p:column>
+                                </p:row>
+
+                                <p:row>
+                                    <p:column><p:separator style="visibility: hidden"/></p:column>
+
+                                </p:row>
+
+                                <p:row>
+                                    <p:column style="left: 10px;" colspan="2"><p:commandButton style="left: 80px;" value="Search" action="#{searchBean.searchUser()}"/></p:column>
+                                    <p:column colspan="2">
+                                        <p:commandButton value="Reset" action="#{takeBookBean.reset()}" update="panel"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:tab>
+                        <p:tab title="Old Materials">
+                            <p:dataTable value="#{MaterialsBean.historyM}" var="his">
+                            <p:column headerText="ID">
+                                <h:outputText value="#{his.loanHistoryID}" />
+                                </p:column>
+                                <p:column headerText="Name">
+                                    <h:outputText value="#{his.name}" />
+                                </p:column>
+
+                            
+                            </p:dataTable>
+                            
+                        </p:tab>
+                    </p:tabView>
+
+
+                </ui:define>
+            </ui:composition>
+        </h:body>  
+
+    </f:view>
+</html>       

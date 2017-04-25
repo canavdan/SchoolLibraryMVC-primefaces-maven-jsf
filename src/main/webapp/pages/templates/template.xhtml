@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core">
+
+    <f:view contentType="text/html" id="fview">
+
+        <h:outputStylesheet name="demo.css" library="css" />
+        <h:outputStylesheet name="header-fixed.css" library="css" />
+        <h:outputStylesheet name="footer-distributed-with-address-and-phones.css" library="css" />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Page template with PrimeFaces</title>
+        <ui:debug />
+        <f:metadata>
+            <ui:insert name="metadata" />
+        </f:metadata>
+
+        <h:head>
+           
+
+            <p:layout fullPage="true" style="background-color:#FFFFFF;">
+
+                <p:layoutUnit style="border: 0px none;
+                              overflow:hidden !important;
+                              border-collapse:collapse;" gutter="0" position="north" size="92" id="north" >
+                    <ui:include src="header.xhtml" />
+                </p:layoutUnit>
+                
+                <h:outputStylesheet name="newcss.css" library="css" />
+                
+                <p:layoutUnit  style="border: 0px none;
+                               border-collapse:collapse;"  position="center">
+                    <h:form id="mainForm">
+                        <p:messages autoUpdate="true" id="msgs" showDetail="true" showSummary="true" />
+                        <ui:insert name="content" />
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="east" size="0" style="width:0px; display:none;" id="east" gutter="0">
+                </p:layoutUnit>
+
+                <p:layoutUnit style="border: 0px none;
+                              padding: 0.2em 0em;
+                              overflow: hidden !important;
+                              overflow-x: hidden;
+                              border-collapse:collapse;" size="120" position="south" id="south" >
+                    <ui:include src="footer.xhtml" />
+                </p:layoutUnit>
+
+            </p:layout>
+
+           <!-- <p:dialog modal="true" widgetVar="statusDialog" showHeader="false" 
+                      draggable="false" closable="false" resizable="false" 
+                      visible="false" position="center" maximizable="false" minimizable="false" >
+                <p:graphicImage value="#{resource['images/ajax-loader.gif']}" />
+            </p:dialog>-->
+
+
+        </h:head>
+
+        <h:body onload="statusDialog.hide();">
+        </h:body>
+
+    </f:view>
+</html>		

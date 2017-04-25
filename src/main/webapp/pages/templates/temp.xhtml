@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+       
+         <h:outputStylesheet name="style.css" library="css" />
+        <h:outputStylesheet name="header-fixed.css" library="css" />
+        <h:outputStylesheet name="footer-distributed-with-address-and-phones.css" library="css" />
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <div id="container">
+
+                <div id="header">
+                    <ui:insert name="header" >
+                        <ui:include src="/pages/templates/header.xhtml" />
+                    </ui:insert>
+                </div>
+                
+                <div id="content">
+                    <ui:insert name="content" >
+                        <ui:include src="/pages/templates/content.xhtml" />
+                    </ui:insert>
+                </div>
+
+                <div id="footer">
+                    <ui:insert name="footer" >
+                        <ui:include src="/pages/templates/footer.xhtml" />
+                    </ui:insert>
+                </div>
+
+            </div>
+        </h:form>
+    </h:body>
+</html>
+

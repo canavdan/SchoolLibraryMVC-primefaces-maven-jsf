@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Search</title>
+                <h:outputStylesheet library="css" name="common.css"/>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core" template="templates/template.xhtml">
+                <ui:define name="metadata"></ui:define>
+                <ui:define name="content">
+
+                    <h:form id="form">
+                        <br/>
+
+                        <p:panelGrid id="panel" styleClass="panelNoBorder"  columnClasses="a,b,c,d">
+                            <p:row>
+                                <p:column><h:outputText value="Query"/></p:column> 
+                                <p:column colspan="3">
+                                    <p:inputText  label="Query" id="queryVal" size="50" value="#{searchBean.query}"/>
+                                    <p:column> <p:message  for="queryVal"/></p:column>                       
+                                </p:column>                          
+
+                            </p:row>
+                            <p:row>
+                                <p:column><p:separator style="visibility: hidden"/></p:column>
+
+                            </p:row>
+                            <p:row>
+                                <p:column>  <h:outputText value="Catalog"/></p:column> 
+                                <p:column> <p:selectOneMenu value="#{searchBean.catalog}" >
+                                        <f:selectItem itemLabel="All Catalogs" itemValue="allCatalog"/>
+                                        <f:selectItems value="#{searchBean.catalogNames}"/>                              
+                                    </p:selectOneMenu></p:column>
+                                <p:column>  <h:outputText value="Branch"/></p:column>
+                                <p:column> <p:selectOneMenu value="#{searchBean.branch}">
+                                        <f:selectItem itemLabel="All Branches" itemValue="allBranch"/>
+                                        <f:selectItems value="#{searchBean.branchNames}"/>
+                                    </p:selectOneMenu></p:column>  
+                            </p:row>
+                            <p:row>
+                                <p:column><p:separator style="visibility: hidden"/></p:column>
+
+                            </p:row>
+
+                            <p:row>
+                                <p:column><h:outputText value="Index"/></p:column>
+                                <p:column><p:selectOneMenu value="#{searchBean.index}">
+                                        <f:selectItem itemLabel="Keywords" itemValue="keywords"/>
+                                        <f:selectItem itemLabel="Author" itemValue="author"/>
+                                        <f:selectItem itemLabel="Title" itemValue="title"/>
+                                        <f:selectItem itemLabel="Publisher" itemValue="publisher"/>
+                                        <f:selectItem itemLabel="Categories" itemValue="categories"/>             
+                                    </p:selectOneMenu></p:column>
+                                <p:column><h:outputText value="Language"/></p:column>
+                                <p:column><p:selectOneMenu value="#{searchBean.language}">
+                                        <f:selectItem itemLabel="All Languages" itemValue="allLang"/>
+                                        <f:selectItems value="#{searchBean.langNames}"/>
+                                    </p:selectOneMenu></p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column><p:separator style="visibility: hidden"/></p:column>
+
+                            </p:row>
+
+                            <p:row>
+                                <p:column style="left: 10px;" colspan="2"><p:commandButton style="left: 80px;" value="Search" action="#{searchBean.search()}"/>
+                                </p:column>
+                                <p:column colspan="2">
+                                    <p:commandButton value="Reset" action="#{searchBean.reset}" update="panel"/>
+                                </p:column>
+                            </p:row>
+                        </p:panelGrid>
+
+
+
+
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>  
+
+    </f:view>
+</html>       

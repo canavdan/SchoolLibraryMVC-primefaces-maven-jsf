@@ -1,0 +1,10 @@
+.panelNoBorder, .panelNoBorder tr, .panelNoBorder td{
+border: hidden;
+border-color: white;
+
+
+}
+.panelNoBorder tr{
+    width: 199px;
+ 
+}

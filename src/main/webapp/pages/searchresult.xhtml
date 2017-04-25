@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Search Result</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core" template="templates/template.xhtml">
+                <ui:define name="metadata"></ui:define>
+                <ui:define name="content">
+                    <h:form id="form">
+
+                        <p:growl id="msgs" showDetail="true" />
+
+                        <p:dataTable id="singleDT" var="mat" value="#{searchBean.material}" 
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15" rows="10"
+                                     selectionMode="single" selection="#{searchBean.selectedMaterials}" rowKey="#{mat.materielID}"  >                
+
+                            <p:column headerText="Id" sortBy="#{mat.materielID}">
+                                <h:outputText value="#{mat.materielID}" />
+                            </p:column>
+                            <p:column headerText="Name" sortBy="#{mat.name}">
+                                <h:outputText value="#{mat.name}" />
+                            </p:column>
+                            <p:column headerText="Title">
+                                <h:outputText value="#{mat.title}" />
+                            </p:column>
+                            <p:column headerText="Page No" sortBy="#{mat.pageNo}">
+                                <h:outputText value="#{mat.pageNo}" />
+                            </p:column> 
+                            <p:column headerText="Language" >
+                                <h:outputText value="#{mat.lang}" />
+                            </p:column> 
+
+                            <p:column headerText="Type">
+                                <h:outputText value="#{mat.type}" />
+                            </p:column> 
+                            <f:facet name="footer">
+                                <p:commandButton process="singleDT" update=":#{component.namingContainer.parent.namingContainer.clientId}:bookDetail" icon="ui-icon-search" value="View" oncomplete="PF('bookDialog').show()" />
+                            </f:facet>
+                        </p:dataTable>  
+
+                        <p:dialog header="Book Info" widgetVar="bookDialog" modal="true" showEffect="fade" hideEffect="fade" closable="true" resizable="false">
+                            <p:outputPanel id="bookDetail" style="text-align:center;">
+                                <p:panelGrid  columns="2" rendered="#{not empty searchBean.selectedMaterials}" columnClasses="label,value">
+
+                                    <f:facet name="header">
+                                        <p:graphicImage library="images" name="kunyeimage.jpg" style="width: 80px; height: 50px;"/>
+
+                                    </f:facet>
+                                    <h:outputText value="Id:" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.materielID}" />
+
+                                    <h:outputText value="Name" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.name}"  />
+
+                                    <h:outputText value="Title" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.title}"/>
+
+                                    <h:outputText value="Page No" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.pageNo}"  />
+
+                                    <h:outputText value="Description" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.description}"  />
+
+                                    <h:outputText value="Price" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.price}"  />
+
+                                    <h:outputText value="Branch" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.branch}"  />
+
+                                    <h:outputText value="Language" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.lang}"  />
+
+                                    <h:outputText value="Categories" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.categories}"  />
+
+                                    <h:outputText value="Publicher" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.publicher}"  />
+                                    
+                                    <h:outputText value="Authors" />
+                                    <h:outputText value="#{searchBean.selectedMaterials.authors}"  />
+                                </p:panelGrid>
+                            </p:outputPanel>
+                        </p:dialog>
+
+                    </h:form>
+
+                </ui:define>
+            </ui:composition>
+        </h:body>  
+
+    </f:view>
+</html>       

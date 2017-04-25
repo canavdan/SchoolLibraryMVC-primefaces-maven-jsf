@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Library Collection</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core" template="templates/template.xhtml">
+                <ui:define name="metadata"></ui:define>
+                <ui:define name="content">
+                    <h:form>
+                    <p:tabView orientation="left">
+                        <p:tab title="By material types">
+                            <p:chart type="pie" model="#{libraryCollectionBean.typeModel}" style="width:700px;height:500px" />
+                        </p:tab>
+                        <p:tab title="By languages">
+                            <p:chart type="pie" model="#{libraryCollectionBean.langModel}" style="width:700px;height:500px" />
+                        </p:tab>
+                        <p:tab title="By Categories">
+                            <p:chart type="pie" model="#{libraryCollectionBean.catModel}" style="width:700px;height:500px" />
+                        </p:tab>
+                         <p:tab title="By Branches">
+                             <p:chart type="pie" model="#{libraryCollectionBean.branchModel}" style="width:700px;height:500px" />
+                        </p:tab>
+                    </p:tabView>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>  
+
+    </f:view>
+</html>       

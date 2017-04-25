@@ -1,0 +1,56 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>User Search Result Bean</title>
+            </f:facet>
+            <f:event type="preRenderView" listener="#{loginnBean.isModerator(event)}"/>
+        </h:head>
+
+        <h:body>
+
+            <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core" template="/pages/templates/template.xhtml">
+                <ui:define name="metadata"></ui:define>
+                <ui:define name="content">
+                    <h:form id="form">
+                        <p:growl id="msgs" showDetail="true" />
+                        <p:dataTable var="user" value="#{userSearchResultBean.memberList}"
+                                     selectionMode="single" selection="#{userSearchResultBean.selectionMember}"
+                                     rowKey="#{user.memberID}"  >
+                            <p:ajax event="rowSelect" listener="#{userSearchResultBean.onRowSelect}" update=":#{component.namingContainer.parent.namingContainer.clientId}:msgs"/>
+                            <p:column headerText="Id" sortBy="#{user.memberID}">
+                                <h:outputText value="#{user.memberID}" />
+                            </p:column>
+                            <p:column headerText="Name">
+                                <h:outputText value="#{user.name}" />
+                            </p:column>
+                            <p:column headerText="Surname">
+                                <h:outputText value="#{user.surname}" />
+                            </p:column>
+                            <p:column headerText="Faculty" >
+                                <h:outputText value="#{user.faculty}" />
+                            </p:column>
+                            <p:column headerText="Department">
+                                <h:outputText value="#{user.departmant}" />
+                            </p:column>
+                            <f:facet name="footer">
+                                <p:commandButton value="Choose" action="#{userSearchResultBean.goUseroperation()}" >
+
+                                    <f:setPropertyActionListener target="#{takeBookBean.username}" value="#{userSearchResultBean.selectionMember.memberID}"/>
+                                  
+                                </p:commandButton>
+                            </f:facet>
+                        </p:dataTable>
+                    </h:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>  
+
+    </f:view>
+</html>       

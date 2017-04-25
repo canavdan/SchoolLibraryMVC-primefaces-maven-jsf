@@ -1,0 +1,57 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Requests</title>
+            </f:facet>
+            <f:event type="preRenderView" listener="#{loginnBean.isMember(event)}"/>
+        </h:head>
+
+        <h:body>
+
+            <h:form id="form">
+
+                <p:dataTable  var="mat" value="#{takeBookBean.material}">                
+
+                    <p:column headerText="Id" sortBy="#{mat.materielID}">
+                        <h:outputText value="#{mat.materielID}" />
+                    </p:column>
+                    <p:column headerText="Name" sortBy="#{mat.name}">
+                        <h:outputText value="#{mat.name}" />
+                    </p:column>
+                    <p:column headerText="Title">
+                        <h:outputText value="#{mat.title}" />
+                    </p:column>
+                    <p:column headerText="Page No" sortBy="#{mat.pageNo}">
+                        <h:outputText value="#{mat.pageNo}" />
+                    </p:column> 
+                    <p:column headerText="Language" >
+                        <h:outputText value="#{mat.lang}" />
+                    </p:column> 
+                    <p:column headerText="Authors" >
+                        <h:outputText value="#{mat.authors}" />
+                    </p:column> 
+                    <p:column headerText="Type">
+                        <h:outputText value="#{mat.type}" />
+                    </p:column> 
+
+                    <p:column headerText="Take">       
+                        <h:commandLink value="Take the Book" action="#{takeBookBean.takeMaterial(mat)}"/>
+
+                    </p:column> 
+
+                </p:dataTable> 
+
+            </h:form>
+
+        </h:body>  
+
+    </f:view>
+</html>       

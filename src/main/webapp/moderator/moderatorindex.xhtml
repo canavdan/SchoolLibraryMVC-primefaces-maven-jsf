@@ -1,0 +1,132 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>My Account Moderator</title>
+            </f:facet>
+            <f:event type="preRenderView" listener="#{loginnBean.isModerator(event)}"/>
+        </h:head>
+
+        <h:body onload="#{staffBean.fillStaff()}">
+
+            <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core" template="/pages/templates/template.xhtml">
+                <ui:define name="metadata"></ui:define>
+                <ui:define name="content">
+                    <p:tabView>
+                        <p:tab title="User Operations">
+                            <h:outputText value="Enter student id or name"/>
+                            <h:inputText value="#{userSearchResultBean.query}"/>
+                            <h:commandLink value="Search" action="#{userSearchResultBean.search()}"/>                           
+                        </p:tab>
+                        <p:tab title="Add Book">
+                            <p:panelGrid styleClass="panelNoBorder" >
+                                <p:row>
+                                    <p:column>
+                                        <h:outputText value="Book ID: "/>  </p:column>
+                                    <p:column>  <p:inputText value="#{MaterialsBean.materielID}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <h:outputText value="Book name: "/>  </p:column>
+                                    <p:column>   <p:inputText value="#{MaterialsBean.name}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <h:outputText value="Title: "/></p:column>
+                                    <p:column>  <p:inputText value="#{MaterialsBean.title}"/>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <h:outputText value="Description: "/> </p:column>
+                                    <p:column>     <p:inputText value="#{MaterialsBean.description}" />
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <h:outputText value="Price: "/> </p:column>
+                                    <p:column>     <p:inputText value="#{MaterialsBean.price}" />
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>
+                                        <h:outputText value="Publisher "/> </p:column>
+                                    <p:column>     <p:inputText value="#{MaterialsBean.publicher}" />
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>   <h:outputText value="Page No: "/></p:column>
+                                    <p:column> <p:inputText value="#{MaterialsBean.pageNo}" />
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>  <h:outputText value="Catalog"/></p:column> 
+                                    <p:column> <p:selectOneMenu value="#{MaterialsBean.categories}" >                             
+                                            <f:selectItems value="#{MaterialsBean.categoriesNames}"/>                              
+                                        </p:selectOneMenu></p:column>
+                                </p:row>
+
+                                <p:row>                           
+                                    <p:column><h:outputText value="Language"/></p:column>
+                                    <p:column><p:selectOneMenu value="#{MaterialsBean.lang}">
+                                            <f:selectItems value="#{MaterialsBean.langNames}"/>
+                                        </p:selectOneMenu></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>  <h:outputText value="Branch"/></p:column>
+                                    <p:column> <p:selectOneMenu value="#{MaterialsBean.branch}">
+                                            <f:selectItems value="#{MaterialsBean.branchNames}"/>
+                                        </p:selectOneMenu></p:column>  
+                                </p:row>
+                                <p:row>
+                                    <p:column>  <h:outputText value="Type"/></p:column>
+                                    <p:column> <p:selectOneMenu value="#{MaterialsBean.type}">
+                                            <f:selectItems value="#{MaterialsBean.typeNames}"/>
+                                        </p:selectOneMenu></p:column>  
+                                </p:row>
+                                <p:row>
+                                    <p:column style="left: 10px;" colspan="2"><p:commandButton style="left: 80px;" value="Search" action="#{MaterialsBean.add()}"/>
+                                    </p:column>
+                                    <p:column colspan="2">
+                                        <p:commandButton value="Reset" action="#{MaterialsBean.reset}"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+
+                        </p:tab>
+                        <p:tab title="My Profile">
+                            <h:panelGrid columns="2" cellpadding="10">                         
+                                <h:outputText value="ID:" />
+                                <h:outputText value="#{staffBean.staff.staffID}"/>
+                                <h:outputText value="Name:" />
+                                <h:outputText value="#{staffBean.staff.name}"/>
+                                <h:outputText value="Surname:" />
+                                <h:outputText value="#{staffBean.staff.surname}"/>
+                                <h:outputText value="Role" />
+                                <h:outputText value="#{staffBean.staff.role}"/>                             
+                                <h:outputText value="Password:" />
+                                <h:outputText value="#{staffBean.staff.password}"/>
+                                <h:outputText value="Mail:" />
+                                <h:outputText value="#{staffBean.staff.mail}"/>
+                                <h:outputText value="Number:" />
+                                <h:outputText value="#{staffBean.staff.phonenumber}"/>
+                            </h:panelGrid>
+
+                        </p:tab>
+                    </p:tabView>
+
+
+                </ui:define>
+            </ui:composition>
+        </h:body>  
+
+    </f:view>
+</html>       

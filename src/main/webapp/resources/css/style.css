@@ -1,0 +1,35 @@
+body { width: auto;
+height: auto;
+margin : 0;
+}
+html {
+    height: 100px;
+    margin : 0;
+}
+#header 
+{
+width:              100%;
+font-size:          36px;
+font-weight:        bold;
+line-height:        48px;
+background-color:   navy;
+color:              white;
+}
+
+#footer
+{
+width:              100%;
+font-weight:        bold;
+background-color:   navy;
+color:              white;
+
+clear : both;
+padding : 5px;
+margin : 0;
+font-size : 90%;
+border-top : 1px solid #fff;
+
+
+
+}
+
